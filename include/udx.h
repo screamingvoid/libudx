@@ -10,6 +10,8 @@ extern "C" {
 #include <stdint.h>
 #include <uv.h>
 
+#define UDX_MAX_PACKET (16 * 1024)
+
 #define UDX_HEADER_SIZE      20
 #define UDX_IPV4_HEADER_SIZE (20 + 8 + UDX_HEADER_SIZE)
 #define UDX_IPV6_HEADER_SIZE (40 + 8 + UDX_HEADER_SIZE)

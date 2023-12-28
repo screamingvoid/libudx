@@ -1402,9 +1402,9 @@ on_uv_poll (uv_poll_t *handle, int status, int events) {
 
     memset(&addr, 0, addr_len);
 
-    char b[2048];
+    char b[UDX_MAX_PACKET];
     buf.base = (char *) &b;
-    buf.len = 2048;
+    buf.len = UDX_MAX_PACKET;
 
     while ((size = udx__recvmsg(socket, &buf, (struct sockaddr *) &addr, addr_len)) >= 0) {
       if (!process_packet(socket, b, size, (struct sockaddr *) &addr) && socket->on_recv != NULL) {
@@ -1417,7 +1417,7 @@ on_uv_poll (uv_poll_t *handle, int status, int events) {
         socket->on_recv(socket, size, &buf, (struct sockaddr *) &addr);
       }
 
-      buf.len = 2048;
+      buf.len = UDX_MAX_PACKET;
     }
   }
 
